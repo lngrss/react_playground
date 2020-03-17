@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { Game } from './game'
+import './css/index.css';
+import { Start } from './start'
 
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <Start />,
   document.getElementById('root')
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Board } from './board'
 import { calculateWinner } from './supporter';
 
-export class Game extends React.Component {
+export class TicTacToe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
