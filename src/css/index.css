@@ -7,6 +7,10 @@ ol, ul {
   padding-left: 30px;
 }
 
+div {
+  white-space: pre-wrap;
+}
+
 .board-row:after {
   clear: both;
   content: "";
@@ -47,4 +51,8 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+}
+
+.bad_move {
+  color: red;
 }
