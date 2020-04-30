@@ -7,7 +7,7 @@ export class Outputter extends React.Component {
         var i = 0;
         return (
             <div>
-                {gallows[this.props.score].map(value => {
+                {gallows[this.props.wrongGuesses.length].map(value => {
                     i++;
                     return (
                         <div key={i}>
@@ -15,6 +15,11 @@ export class Outputter extends React.Component {
                         </div>
                     )
                 })}
+                <div>
+                    {[...this.props.secretWord].map(letter => {
+                        return this.props.rightGuesses.includes(letter)) ? letter : ' _ '
+                    })}
+                </div>
             </div>
         )
     }
