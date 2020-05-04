@@ -17,7 +17,7 @@ export class Outputter extends React.Component {
                 })}
                 <div>
                     {[...this.props.secretWord].map(letter => {
-                        return this.props.rightGuesses.includes(letter)) ? letter : ' _ '
+                        return this.props.rightGuesses.includes(letter) ? letter : ' _ '
                     })}
                 </div>
             </div>

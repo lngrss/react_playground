@@ -2,6 +2,8 @@ import React from 'react';
 import { Outputter } from './outputter';
 import { Inputter } from './inputter';
 import { secretWord, guessChecksOut } from './helpers/helper_functions';
+import { Lost } from '../lost';
+import { Won } from '../won';
 
 export class Hangman extends React.Component {
     constructor(props) {
@@ -14,6 +16,21 @@ export class Hangman extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    gameWon() {
+        var bool = true;
+        for (var i = 0; i < this.state.secretWord.length; i++) {
+            if (!this.state.rightGuesses.includes(this.state.secretWord[i])) {
+                bool = false;
+                break;
+            }
+        }
+        return bool;
+    }
+
+    gameLost() {
+        return (this.state.wrongGuesses.length > 6)
     }
 
     handleChange(e) {
@@ -37,22 +54,28 @@ export class Hangman extends React.Component {
 
     render() {
         console.log('hangman', this.state);
-        return (
-            <div className="game">
-                <div className="game-board">
-                    <Outputter 
-                    secretWord={this.state.secretWord}
-                    wrongGuesses={this.state.wrongGuesses}
-                    rightGuesses={this.state.rightGuesses}/>
+        if (this.gameWon()) {
+            return <Won secretWord={this.state.secretWord}/>
+        } else if (this.gameLost()) {
+            return <Lost secretWord={this.state.secretWord}/>
+        } else {
+            return (
+                <div className="game">
+                    <div className="game-board">
+                        <Outputter 
+                        secretWord={this.state.secretWord}
+                        wrongGuesses={this.state.wrongGuesses}
+                        rightGuesses={this.state.rightGuesses}/>
+                    </div>
+                    <div className="game-info">
+                        <Inputter 
+                        value={this.state.value}
+                        wrongGuesses={this.state.wrongGuesses}
+                        onChange={this.handleChange}
+                        onSubmit={this.handleSubmit}/>
+                    </div>
                 </div>
-                <div className="game-info">
-                    <Inputter 
-                    value={this.state.value}
-                    wrongGuesses={this.state.wrongGuesses}
-                    onChange={this.handleChange}
-                    onSubmit={this.handleSubmit}/>
-                </div>
-            </div>
-        )
+            )
+        }
     }
 }
